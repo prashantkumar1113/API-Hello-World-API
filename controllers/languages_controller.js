@@ -56,6 +56,15 @@ languages.get("/", (req, res) => {
         });
 });
 
+// Random
+languages.get("/random", (req, res) => {
+    const languages = Language.find().then((foundLanguages) => {
+        const randomIndex = Math.floor(Math.random() * foundLanguages.length);
+        console.log(randomIndex);
+        res.json(foundLanguages[randomIndex]);
+    });
+});
+
 // Show
 languages.get("/:name", (req, res) => {
     Language.findOne({name: req.params.name.toLowerCase()})
